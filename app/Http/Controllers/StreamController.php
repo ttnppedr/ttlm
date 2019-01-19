@@ -67,4 +67,30 @@ class StreamController extends Controller
             'data' => $stream,
         ], 200, [], JSON_UNESCAPED_UNICODE);
     }
+
+    public function update(Stream $stream)
+    {
+        $validator = Validator::make($request = request()->all(), [
+            'title' => 'string',
+            'url' => 'active_url',
+            'played_at' => 'date',
+            'is_finished' => 'boolean',
+            'is_living' => 'boolean',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'result' => 'fail',
+                'message' => $validator->errors()->first(),
+            ], 200, [], JSON_UNESCAPED_UNICODE);
+        }
+
+        $stream->update($request);
+        $stream = Stream::find($stream->id);
+
+        return response()->json([
+            'result' => 'success',
+            'data' => $stream,
+        ], 200, [], JSON_UNESCAPED_UNICODE);
+    }
 }
