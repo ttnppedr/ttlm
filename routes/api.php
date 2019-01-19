@@ -18,4 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::POST('/streams', 'StreamController@store');
+Route::GET('/streams/{stream}', 'StreamController@show');
 Route::GET('/streams', 'StreamController@index');

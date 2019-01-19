@@ -59,4 +59,12 @@ class StreamController extends Controller
                 ->get()
         ], 200, [], JSON_UNESCAPED_UNICODE);
     }
+
+    public function show(Stream $stream)
+    {
+        return response()->json([
+            'result' => 'success',
+            'data' => $stream,
+        ], 200, [], JSON_UNESCAPED_UNICODE);
+    }
 }
