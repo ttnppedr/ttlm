@@ -74,4 +74,32 @@ class MerchandiseController extends Controller
             ],
         ], 200, [], JSON_UNESCAPED_UNICODE);
     }
+
+    public function update(Merchandise $merchandise)
+    {
+        $validator = Validator::make($request = request()->all(), [
+            'stream_id' => 'integer',
+            'name' => 'string',
+            'price' => 'integer',
+            'picture' => 'image'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'result' => 'fail',
+                'message' => $validator->errors()->first(),
+            ], 200, [], JSON_UNESCAPED_UNICODE);
+        }
+
+        if (request()->hasFile('picture')) {
+            $request['picture'] = 'storage/' . request()->file('picture')->store('picture', 'public');
+        }
+
+        $merchandise->update($request);
+
+        return response()->json([
+            'result' => 'success',
+            'data' => $merchandise,
+        ], 200, [], JSON_UNESCAPED_UNICODE);
+    }
 }
