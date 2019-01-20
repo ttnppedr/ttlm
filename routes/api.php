@@ -25,3 +25,5 @@ Route::PATCH('/streams/{stream}', 'StreamController@update');
 Route::POST('/merchandises', 'MerchandiseController@store');
 Route::GET('/merchandises', 'MerchandiseController@index');
 Route::PATCH('/merchandises/{merchandise}', 'MerchandiseController@update');
+
+Route::POST('/orders', 'OrderController@store');
