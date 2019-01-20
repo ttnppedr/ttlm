@@ -12,4 +12,9 @@ class Stream extends Model
     {
         return $this->hasMany('App\Merchandise');
     }
+
+    public function orders()
+    {
+        return $this->hasMany('App\Order');
+    }
 }

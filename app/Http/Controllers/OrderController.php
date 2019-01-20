@@ -119,4 +119,20 @@ class OrderController extends Controller
             ],
         ], 200, [], JSON_UNESCAPED_UNICODE);
     }
+
+    public function showStream(Stream $stream)
+    {
+        $orders = $stream->orders;
+
+        foreach ($orders as $order) {
+            $order->items = $order->getItemsJson();
+        }
+
+        return response()->json([
+            'result' => 'success',
+            'data' => [
+                'orders' => $orders,
+            ],
+        ], 200, [], JSON_UNESCAPED_UNICODE);
+    }
 }
