@@ -82,4 +82,14 @@ class OrderController extends Controller
             ]
         ], 200, [], JSON_UNESCAPED_UNICODE);
     }
+
+    public function show(Order $order)
+    {
+        $order->items = $order->getItemsJson();
+
+        return response()->json([
+            'result' => 'success',
+            'data' => $order
+        ], 200, [], JSON_UNESCAPED_UNICODE);
+    }
 }
