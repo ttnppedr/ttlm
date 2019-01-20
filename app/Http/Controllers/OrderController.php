@@ -80,6 +80,6 @@ class OrderController extends Controller
             'data' => [
                 'order_id' => $order->id,
             ]
-        ]);
+        ], 200, [], JSON_UNESCAPED_UNICODE);
     }
 }
