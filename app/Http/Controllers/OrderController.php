@@ -92,4 +92,31 @@ class OrderController extends Controller
             'data' => $order
         ], 200, [], JSON_UNESCAPED_UNICODE);
     }
+
+    public function showUser()
+    {
+        $validator = Validator::make($request = request()->all(), [
+            'user_id' => 'required|integer',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'result' => 'fail',
+                'message' => $validator->errors()->first(),
+            ], 200, [], JSON_UNESCAPED_UNICODE);
+        }
+
+        $orders = Order::where('user_id', $request['user_id'])->get();
+
+        foreach ($orders as $order) {
+            $order->items = $order->getItemsJson();
+        }
+
+        return response()->json([
+            'result' => 'success',
+            'data' => [
+                'orders' => $orders,
+            ],
+        ], 200, [], JSON_UNESCAPED_UNICODE);
+    }
 }

@@ -27,4 +27,5 @@ Route::GET('/merchandises', 'MerchandiseController@index');
 Route::PATCH('/merchandises/{merchandise}', 'MerchandiseController@update');
 
 Route::POST('/orders', 'OrderController@store');
+Route::GET('/orders/user', 'OrderController@showUser');
 Route::GET('/orders/{order}', 'OrderController@show');
