@@ -109,6 +109,10 @@ class StreamController extends Controller
             }
         }
 
+        if (isset($request['is_finished']) && $request['is_finished']) {
+            $request['is_living'] = false;
+        }
+
         $stream->update($request);
         $stream = Stream::find($stream->id);
 
