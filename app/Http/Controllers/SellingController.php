@@ -65,6 +65,14 @@ class SellingController extends Controller
             ], 200, [], JSON_UNESCAPED_UNICODE);
         }
 
+        $stream = $selling->merchandise->stream;
+        if ($stream->is_finished) {
+            return response()->json([
+                'result' => 'fail',
+                'message' => 'Stream is finished',
+            ], 200, [], JSON_UNESCAPED_UNICODE);
+        }
+
         if ($selling->is_finished && isset($request['count'])) {
             return response()->json([
                 'result' => 'fail',

@@ -14,4 +14,9 @@ class Selling extends Model
 
         return json_encode($merchandise, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
     }
+
+    public function merchandise()
+    {
+        return $this->belongsTo('App\Merchandise');
+    }
 }
