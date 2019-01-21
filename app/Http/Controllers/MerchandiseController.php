@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Validator;
 use App\Stream;
+use App\Selling;
 use App\Merchandise;
 use Illuminate\Http\Request;
 
@@ -38,6 +39,8 @@ class MerchandiseController extends Controller
 
         $merchandise = Merchandise::create($request);
         $merchandise = Merchandise::find($merchandise->id);
+
+        Selling::create(['merchandise_id' => $merchandise->id]);
 
         return response()->json([
             'result' => 'success',

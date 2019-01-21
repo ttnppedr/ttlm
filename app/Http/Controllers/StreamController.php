@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Validator;
 use App\Stream;
+use App\Selling;
 
 class StreamController extends Controller
 {
@@ -86,6 +87,15 @@ class StreamController extends Controller
         }
 
         $stream->update($request);
+
+        if (isset($request['is_living']) && $request['is_living']) {
+            $merchandises = $stream->merchandises;
+
+            foreach ($merchandises as $merchandise) {
+                Selling::create(['merchandise_id' => $merchandise->id]);
+            }
+        }
+
         $stream = Stream::find($stream->id);
 
         return response()->json([
