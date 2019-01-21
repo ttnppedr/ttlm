@@ -86,6 +86,13 @@ class StreamController extends Controller
             ], 200, [], JSON_UNESCAPED_UNICODE);
         }
 
+        if ($stream->is_finished) {
+            return response()->json([
+                'result' => 'fail',
+                'message' => 'Can not update finished stream',
+            ], 200, [], JSON_UNESCAPED_UNICODE);
+        }
+
         if (isset($request['is_living']) && $request['is_living']) {
             $livingStream = Stream::where('is_living', true)->count();
             if ($livingStream > 0) {
