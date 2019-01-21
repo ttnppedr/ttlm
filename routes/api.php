@@ -32,3 +32,4 @@ Route::GET('/orders/stream/{stream}', 'OrderController@showStream');
 Route::GET('/orders/{order}', 'OrderController@show');
 
 Route::GET('/sellings', 'SellingController@index');
+Route::PATCH('/sellings/{selling}', 'SellingController@update');
