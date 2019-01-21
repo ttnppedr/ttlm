@@ -86,9 +86,15 @@ class StreamController extends Controller
             ], 200, [], JSON_UNESCAPED_UNICODE);
         }
 
-        $stream->update($request);
-
         if (isset($request['is_living']) && $request['is_living']) {
+            $livingStream = Stream::where('is_living', true)->count();
+            if ($livingStream > 0) {
+                return response()->json([
+                    'result' => 'fail',
+                    'message' => 'Another stream is living',
+                ], 200, [], JSON_UNESCAPED_UNICODE);
+            }
+
             $merchandises = $stream->merchandises;
 
             foreach ($merchandises as $merchandise) {
@@ -96,6 +102,7 @@ class StreamController extends Controller
             }
         }
 
+        $stream->update($request);
         $stream = Stream::find($stream->id);
 
         return response()->json([
