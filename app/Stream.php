@@ -17,4 +17,14 @@ class Stream extends Model
     {
         return $this->hasMany('App\Order');
     }
+
+    public function getSellings()
+    {
+        $merchandises = $this->merchandises->toArray();
+        $merchandiseId = array_map(function ($m) {
+            return $m['id'];
+        }, $merchandises);
+
+        return Selling::whereIn('merchandise_id', $merchandiseId)->get();
+    }
 }

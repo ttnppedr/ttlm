@@ -110,6 +110,11 @@ class StreamController extends Controller
         }
 
         if (isset($request['is_finished']) && $request['is_finished']) {
+            $sellings = $stream->getSellings();
+            foreach ($sellings as $selling) {
+                $selling->update(['is_finished' => true]);
+            }
+
             $request['is_living'] = false;
         }
 
