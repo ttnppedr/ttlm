@@ -30,3 +30,5 @@ Route::POST('/orders', 'OrderController@store');
 Route::GET('/orders/user', 'OrderController@showUser');
 Route::GET('/orders/stream/{stream}', 'OrderController@showStream');
 Route::GET('/orders/{order}', 'OrderController@show');
+
+Route::GET('/sellings', 'SellingController@index');
